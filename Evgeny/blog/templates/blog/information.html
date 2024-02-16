@@ -1,0 +1,20 @@
+{%extends 'blog/base.html'%}
+{% load static %}
+{% block css_additional %} <link rel="stylesheet" href="{% static 'blog/css/information.css'%}"> {% endblock %}
+{% block title %} Информация о мне {% endblock %}
+
+{% block content %}
+
+    <h2>Меня зовут - Евгений Горденко Александрович</h2>
+    <h3>Список моих увлечений:</h3>
+    <ul>
+            <li><a href="{% url 'education' %}">Образование</a></li>
+            <li><a href="{% url 'programming' %}">Программирование</a></li>
+            <li><a href="">Спорт</a></li>
+
+
+
+    </ul>
+    <a href="https://vk.com/evgenygord"><img src="https://sun1-88.userapi.com/s/v1/ig2/AKS8wHHdQ7ePP2JK4opSb5a0pmkIMfwffQOAaNX5vQsiCgAEtw4f_fXnzfzjkHrRZYfeW08VAa_wI4CFZEj9xWDj.jpg?size=400x400&quality=95&crop=406,452,1506,1506&ava=1" ></a>
+
+{% endblock %}

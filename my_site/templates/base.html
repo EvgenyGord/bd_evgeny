@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static %}
+  {%block css_additional%}
+  <link rel="stylesheet" href="{% static 'blog/css/base.css'%}">
+  {%endblock%}
+</head>
+<body>
+
+{% include 'blog/include/header.html' %}
+
+
+
+<div class="row">
+  {% block content %}
+
+  {% endblock %}
+  {% include 'blog/include/right_column.html' %}
+</div>
+
+
+{% include 'blog/include/footer.html' %}
+</body>
+</html>

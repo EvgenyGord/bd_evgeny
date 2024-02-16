@@ -1,0 +1,15 @@
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto; /* Центрируем изображение по центру горизонтально */
+  border-radius: 50%;
+  transition: transform 0.3s, filter 0.3s; /* Плавное увеличение и изменение фильтра */
+}
+
+/* Подсветка для изображений при наведении */
+img:hover {
+  transform: scale(1.05); /* Увеличиваем изображение немного при наведении */
+  filter: brightness(1.2); /* Увеличиваем яркость изображения */
+}
+
