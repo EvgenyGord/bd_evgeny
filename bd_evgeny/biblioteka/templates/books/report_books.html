@@ -1,0 +1,42 @@
+{% block content %}
+{% load static %}
+{% block css_additional %} <link rel="stylesheet" href="{% static 'biblioteka/css/table.css'%}"> {% endblock %}
+<style>
+  body {
+    background-image: url('https://klike.net/uploads/posts/2022-11/1668332056_2-3.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<div class="container">
+  <h2>Вывод таблицы Книг</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Название</th>
+        <th>Год выпуска</th>
+        <th>Автор</th>
+        <th>Жанр</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+        <tr>
+          <td>{{ book.book_id }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.year }}</td>
+          <td>{{ book.fk_author }}</td>
+          <td>{{ book.fk_genre }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <br>
+  <a href="{% url 'display_books' %}">Вернуться на Книги</a>
+  <a href="{% url 'export_books_to_excel' %}">Отчёт в Excel</a>
+</div>
+{% endblock %}

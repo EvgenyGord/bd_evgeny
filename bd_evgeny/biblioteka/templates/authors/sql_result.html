@@ -1,0 +1,45 @@
+{% block content %}
+{% load static %}
+{% block css_additional %} <link rel="stylesheet" href="{% static 'biblioteka/css/table.css'%}"> {% endblock %}
+<style>
+  body {
+    background-image: url('https://catherineasquithgallery.com/uploads/posts/2021-02/1613624994_47-p-fon-dlya-prezentatsii-o-pisatele-53.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<div class="container">
+  <h2>Результат выполненного SQL-запроса</h2>
+
+  {% if sql_error %}
+    <p style="color: red;">Ошибка выполнения SQL-запроса: {{ sql_error }}</p>
+  {% else %}
+    <table border="1">
+      <thead>
+        <tr>
+          {% for col in sql_columns %}
+            <th>{{ col }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in sql_rows %}
+          <tr>
+            {% for val in row %}
+              <td>{{ val }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if sql_columns and sql_rows %}
+      <a href="{% url 'export_sql_results_to_excel' %}?query={{ sql_query }}" target="_blank">Отчёт в Excel</a>
+    {% endif %}
+  {% endif %}
+
+  <p><a href="{% url 'home' %}">Вернуться на Главную</a></p>
+</div>
+{% endblock %}

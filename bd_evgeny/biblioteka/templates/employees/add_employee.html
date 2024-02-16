@@ -1,0 +1,23 @@
+{% block content %}
+{% load static %}
+{% block css_additional %} <link rel="stylesheet" href="{% static 'biblioteka/css/table.css'%}"> {% endblock %}
+<style>
+  body {
+    background-image: url('https://cojo.ru/wp-content/uploads/2022/12/delovoi-fon-80.webp');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<div class="container">
+  <h2>Добавить Emloyee(Сотрудника)</h2>
+  <form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить</button>
+  </form>
+  <a href="{% url 'display_employees' %}">Вернуться на Employees</a>
+</div>
+{% endblock %}

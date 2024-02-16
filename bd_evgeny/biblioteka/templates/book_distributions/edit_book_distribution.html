@@ -1,0 +1,23 @@
+{% block content %}
+{% load static %}
+{% block css_additional %} <link rel="stylesheet" href="{% static 'biblioteka/css/table.css'%}"> {% endblock %}
+<style>
+  body {
+    background-image: url('https://xspo.ru/wp-content/uploads/2020/05/tradeshow_books_blog.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<div class="container">
+  <h2>Изменить данное Выдачи Книги</h2>
+  <form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить изменения</button>
+  </form>
+  <a href="{% url 'display_book_distributions' %}">Вернуться на Выдача Книг</a>
+</div>
+{% endblock %}

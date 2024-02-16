@@ -1,0 +1,23 @@
+{% block content %}
+{% load static %}
+{% block css_additional %} <link rel="stylesheet" href="{% static 'biblioteka/css/table.css'%}"> {% endblock %}
+<style>
+  body {
+    background-image: url('https://cdn-news.readmoo.com/wp-content/uploads/2015/08/150826_導讀誤讀.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<div class="container">
+  <h2>Добавить Абонента</h2>
+  <form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить</button>
+  </form>
+  <a href="{% url 'display_subscribers' %}">Вернуться на Абонентов</a>
+</div>
+{% endblock %}

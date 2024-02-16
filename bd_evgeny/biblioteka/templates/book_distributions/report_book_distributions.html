@@ -1,0 +1,44 @@
+{% block content %}
+{% load static %}
+{% block css_additional %} <link rel="stylesheet" href="{% static 'biblioteka/css/table.css'%}"> {% endblock %}
+<style>
+  body {
+    background-image: url('https://xspo.ru/wp-content/uploads/2020/05/tradeshow_books_blog.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<div class="container">
+  <h2>Вывод таблицы Выдача Книг</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Дата выпуска</th>
+        <th>Дата возврата</th>
+        <th>Абонент</th>
+        <th>Сотрудник</th>
+        <th>Книга</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book_distribution in book_distributions %}
+        <tr>
+          <td>{{ book_distribution.book_distribution_id }}</td>
+          <td>{{ book_distribution.date_of_issue }}</td>
+          <td>{{ book_distribution.return_date }}</td>
+          <td>{{ book_distribution.fk_subscriber }}</td>
+          <td>{{ book_distribution.fk_employee }}</td>
+          <td>{{ book_distribution.fk_book }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <br>
+  <a href="{% url 'display_book_distributions' %}">Вернуться на Выдачу Книг</a>
+  <a href="{% url 'export_book_distributions_to_excel' %}">Отчёт в Excel</a>
+</div>
+{% endblock %}

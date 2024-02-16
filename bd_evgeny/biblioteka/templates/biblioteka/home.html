@@ -1,0 +1,44 @@
+{%extends 'biblioteka/base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+
+    <h2>Приветсвую вас, меня зовут Евгений Горденко (20-КБ-ИБ2)</h2>
+    <p>Для того чтобы перейти в Администратирование Django нажмите --> <a href="http://127.0.0.1:8000/admin">DjangoAdmin</a></p>
+
+    <h2 style="color:orange">Моя БД состоит из таблиц:</h2>
+    <ul>
+        <li><a href="http://127.0.0.1:8000/authors">Author(Автор)</a></li>
+        <li><a href="http://127.0.0.1:8000/employees">Employee(Сотрудник)</a></li>
+        <li><a href="http://127.0.0.1:8000/genres">Genre(Жанр)</a></li>
+        <li><a href="http://127.0.0.1:8000/subscribers">Subscriber(Абонент)</a></li>
+        <li><a href="http://127.0.0.1:8000/books">Book(Книга)</a></li>
+        <li><a href="http://127.0.0.1:8000/book_distributions">BookDistribution(Выдача книг)</a></li>
+    </ul>
+    <!-- Добавляем форму для ввода SQL-запроса -->
+    <form method="post" action="{% url 'execute_sql_query' %}">
+    {% csrf_token %}
+    <label>Введите SQL-запрос:</label>
+    <br>
+    <textarea name="sql_query" rows="4" cols="50">{{ sql_query }}</textarea>
+    <br>
+    <input type="submit" value="Отправить">
+    </form>
+<p>Все основные примеры SQl-запроса</p>
+<p>по нажатию добавляются в нашу форму</p>
+<a href="{% url 'home' %}?sql_query=SELECT+book.book_id+AS+Идентификатор_книги,+book.title+AS+Название_книги,+genre.title+AS+Название_жанра+FROM+public.book+JOIN+public.genre+ON+book.fk_genre_id+=+genre.genre_id+WHERE+genre.title+=+'Роман'">Книги с жанром Роман</a>
+<br>
+<a href="{% url 'home' %}?sql_query=SELECT s.first_name AS Абонент_Имя, s.last_name AS Абонент_Фамилия, e.first_name AS Сотрудник_Имя, e.last_name AS Сотрудник_Фамилия, bd.date_of_issue AS Дата_выдачи, bd.return_date AS Дата_сдачи FROM public.book_distribution bd JOIN public.employee e ON bd.fk_employee_id = e.employee_id JOIN public.subscriber s ON bd.fk_subscriber_id = s.subscriber_id;">Взаимодействия абонентов и сотрудников</a>
+<br>
+<a href="{% url 'home' %}?sql_query=SELECT book.title AS Название_книги, s.first_name AS Абонент_Имя, s.last_name AS Абонент_Фамилия, bd.date_of_issue AS Дата_выдачи, bd.return_date AS Дата_сдачи FROM public.book_distribution bd JOIN public.book ON bd.fk_book_id = book.book_id JOIN public.subscriber s ON bd.fk_subscriber_id = s.subscriber_id;">Общая информация о книгах, абонентах и датах</a>
+<br>
+<a href="{% url 'home' %}?sql_query=SELECT e.first_name AS Сотрудник_Имя, e.last_name AS Сотрудник_Фамилия, s.first_name AS Абонент_Имя, s.last_name AS Абонент_Фамилия, CASE WHEN bd.return_date IS NULL THEN 'Не возвращена' ELSE 'Возвращена' END AS Статус_возврата FROM public.book_distribution bd JOIN public.employee e ON bd.fk_employee_id = e.employee_id JOIN public.subscriber s ON bd.fk_subscriber_id = s.subscriber_id;">Информация о сотруднике, абоненте и статусе возврата</a>
+<br>
+<a href="{% url 'home' %}?sql_query=SELECT * FROM public.author WHERE year_of_death IS NULL;">Авторы, которые ещё при жизни</a>
+<br>
+<a href="{% url 'home' %}?sql_query=SELECT book.title AS Название_книги, genre.title AS Название_жанра FROM public.book JOIN public.author ON book.fk_author_id = author.author_id JOIN public.genre ON book.fk_genre_id = genre.genre_id WHERE author.first_name = 'Александр' AND author.last_name = 'Пушкин';">Книги и жанры Пушкина</a>
+
+
+
+{% endblock %}

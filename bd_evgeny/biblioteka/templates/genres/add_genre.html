@@ -1,0 +1,23 @@
+{% block content %}
+{% load static %}
+{% block css_additional %} <link rel="stylesheet" href="{% static 'biblioteka/css/table.css'%}"> {% endblock %}
+<style>
+  body {
+    background-image: url('https://catherineasquithgallery.com/uploads/posts/2021-02/1612871877_81-p-foni-dlya-proekta-krasnaya-kniga-89.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<div class="container">
+  <h2>Добавить Жанр</h2>
+  <form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить</button>
+  </form>
+  <a href="{% url 'display_genres' %}">Вернуться на Жанры</a>
+</div>
+{% endblock %}

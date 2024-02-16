@@ -1,0 +1,42 @@
+{% block content %}
+{% load static %}
+{% block css_additional %} <link rel="stylesheet" href="{% static 'biblioteka/css/table.css'%}"> {% endblock %}
+<style>
+  body {
+    background-image: url('https://cdn-news.readmoo.com/wp-content/uploads/2015/08/150826_導讀誤讀.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<div class="container">
+  <h2>Вывод таблицы Абонентов</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Адрес</th>
+        <th>Номер телефона</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for subscriber in subscribers %}
+        <tr>
+          <td>{{ subscriber.subscriber_id }}</td>
+          <td>{{ subscriber.first_name }}</td>
+          <td>{{ subscriber.last_name }}</td>
+          <td>{{ subscriber.address }}</td>
+          <td>{{ subscriber.phone_number }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <br>
+  <a href="{% url 'display_subscribers' %}">Вернуться на Абонентов</a>
+  <a href="{% url 'export_subscribers_to_excel' %}">Отчёт в Excel</a>
+</div>
+{% endblock %}

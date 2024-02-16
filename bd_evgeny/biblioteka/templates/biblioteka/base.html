@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %} </title>
+    <style>
+        body {
+            background-image: url('https://office-guru.ru/wp-content/uploads/2021/08/python-logo-4k-i6-1600x1200-1.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center top -150px;
+        }
+        h2 {
+            color:#89E9CD;
+        }
+        p {
+            color:#89E9CD;
+        }
+        a{
+            color:#FA7892;
+        }
+        ul li{
+            color:#FA7892;
+            padding: 10px;
+        }
+        label{
+            color:#FA7892;
+        }
+    </style>
+</head>
+<body>
+
+  {% block content %}
+
+  {% endblock %}
+
+</body>
+</html>
